@@ -1,0 +1,192 @@
+GET http://localhost:8089/product/all?username=bb&pid=123123dfsdf
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-05-21T112008.200.json
+
+###
+
+GET http://localhost:8089/collect/addItem?username=bb&pid=123123dfsdf
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-04-18T050330.404.html
+
+###
+
+GET http://localhost:8089/collect/addItem?username=bb&pid=123123dfsdf
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-04-18T050205.404.html
+
+###
+
+GET http://localhost:8089/collect/addItem?username=bb&pid=123123dfsdf
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-04-18T050117.404.html
+
+###
+
+GET http://localhost:8089/collect/addItem?username=bb&pid=123123dfsdf
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-04-18T045256.404.html
+
+###
+
+GET http://localhost:8089/collect/addItem?username=bb&pid=123123dfsdf
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-04-18T045217.500.html
+
+###
+
+GET http://localhost:8089/collect/addItem?username=bb&pid=123123dfsdf
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-04-18T044942.500.html
+
+###
+
+GET http://localhost:8089/collect/addItem?username=bb&pid=123123dfsdf
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-04-18T044741.500.html
+
+###
+
+GET http://localhost:8089/collect/addItem?username=bb&pid=123123dfsdf
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-04-18T044558.500.html
+
+###
+
+GET http://localhost:8089/collect/addItem?username=bb&pid=123123dfsdf
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-04-18T044522.500.html
+
+###
+
+GET http://localhost:8089/collect/addItem?username=bb&pid=123123dfsdf
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+GET http://localhost:8089/collect/addItem?username=bb&pid=123123dfsdf
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+GET http://localhost:8089/collect/addItem?username=bb&pid=123123dfsdf
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-04-17T045223.500.html
+
+###
+
+GET http://localhost:8089/collect/addItem?username=bb&pid=123123dfsdf
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+GET http://localhost:8089/collect/addItem?username=bb&pid=123123dfsdf
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-04-17T045017.500.html
+
+###
+
+GET http://localhost:8089/user/login?username=888&password=bbb&username=123&password=3433
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-04-16T061302.200.html
+
+###
+
+GET http://localhost:8089/user/login?username=888&password=bbb&username=123&password=3433
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-04-16T061259.200.html
+
+###
+
+GET http://localhost:8089/user/login?username=888&password=bbb&username=123&password=3433
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-04-16T061010.200.html
+
+###
+
+GET http://localhost:8089/user/login&username=123&password=3433?username=888&password=bbb
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-04-16T060916.404.html
+
+###
+
+GET http://localhost:8089/user/login?username=888&password=bbb
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-04-16T060850.200.html
+
+###
+
+GET http://localhost:8089/user/login?username=888&password=bbb
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-04-16T060821.200.html
+
+###
+
+GET http://localhost:8089/user/login?username=888&password=bbb
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+GET http://localhost:8089/user/query?username=bbb&password=bbb
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-04-08T054559.500.html
+
+###
+
+GET http://localhost:8089/user/query?username=bbb&password=bbb
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-04-08T054522.500.html
+
+###
+
+GET http://localhost:8089/user/query?username=bbb&password=bbb
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-04-08T054514.500.html
+
+###
+
