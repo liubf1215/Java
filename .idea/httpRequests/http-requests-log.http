@@ -1,3 +1,51 @@
+POST http://localhost:8089/share/admin/login?username=liubf&password=961215
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-06-27T063621.200.json
+
+###
+
+POST http://localhost:8089/share/admin/login?username=961215&password=961215
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-06-27T063606.200.json
+
+###
+
+POST http://localhost:8089/share/admin/login?username=bb&password=123123dfsdf
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-06-27T063536.200.json
+
+###
+
+POST http://localhost:8089/share/admin/login?username=bb&password=123123dfsdf
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-06-27T061932.404.html
+
+###
+
+GET http://localhost:8089/share/admin/login?username=bb&password=123123dfsdf
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-06-27T061409.404.html
+
+###
+
+GET http://localhost:8089/share?username=bb&password=123123dfsdf
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-06-27T061257.500.html
+
+###
+
 GET http://localhost:8089/product/all?username=bb&pid=123123dfsdf
 Accept: */*
 Cache-Control: no-cache
