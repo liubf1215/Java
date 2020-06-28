@@ -32,25 +32,21 @@ body {
 	<!-- 引入header.jsp -->
 	<jsp:include page="/WEB-INF/jsp/header.jsp"></jsp:include>
 
-
-	<div class="row" style="width: 1210px; margin: 0 auto;">
-		<div class="col-md-12">
-			<ol class="breadcrumb">
-				<li><a href="#">首页</a></li>
-			</ol>
-		</div>
+	<div class="container-fluid" style="background-color:#6dcff6">
 		<c:if test="${empty pageInfo.list}">
-		   <font color="#FF0000" >&nbsp;&nbsp;&nbsp;&nbsp;没有商品,请搜索其他商品</font>
+		   <font color="#FF0000" >&nbsp;&nbsp;&nbsp;&nbsp;没有商品,请浏览其他商品页</font>
 		</c:if>
 		
 		
 		<c:if test="${!empty pageInfo.list}">
+
+
 		<c:forEach items="${pageInfo.list}" var="pro">
-		    
-		   
-			<div class="col-md-2" style="height:250px">
+
+
+			<div class="col-md-2 col-sm-2 col-xs-6" align="center" style="height:250px">
 			     <a href="${pageContext.request.contextPath }/product/info?pid=${pro.pid}&cid=${cid}&pageNum=${pageInfo.pageNum}">
-					<img src="${pageContext.request.contextPath }/${pro.pimage}" width="170" height="170" style="display: inline-block;">
+					<img src="${pageContext.request.contextPath }${pro.pimage}"  style="display: inline-block">
 				</a>
 				<p>
 					<a href="${pageContext.request.contextPath }/product/info?pid=${pro.pid}&cid=${cid}&pageNum=${pageInfo.pageNum}" style='color: green'>${pro.pname }</a>
@@ -60,17 +56,24 @@ body {
 				</p>
 				
 			</div>
-		
-		</c:forEach>
-        </c:if>
-		
 
-		
+
+
+		</c:forEach>
+
+        </c:if>
 
 	</div>
 
-	<!--分页 -->
-	<div style="width: 380px; margin: 0 auto; margin-top: 50px;">
+
+
+
+
+
+	<!--分页	-->
+	<div class="container-fluid" style="background-color:#6dcff6">
+		<div class="row">
+	<div class="col-md-offset-4 col-sm-offset-4 col-xsoffset-4" style="width: 380px; margin: 0 auto; margin-top: 50px;align-content: center">
 		<ul class="pagination" style="text-align: center; margin-top: 10px;">
 		
 			<!-- 上一页 -->
@@ -83,7 +86,7 @@ body {
 			</c:if>
 			<c:if test="${pageInfo.pageNum!=1 }">
 				<li>
-					<a href="${pageContext.request.contextPath}/product?method=productList&cid=${cid}&pageNum=${pageInfo.pageNum-1 }" aria-label="Previous">
+					<a href="${pageContext.request.contextPath}/product/list?cid=${cid}&pn=${pageInfo.pageNum-1 }" aria-label="Previous">
 						<span aria-hidden="true">&laquo;</span>
 					</a>
 				</li>
@@ -97,7 +100,7 @@ body {
 					<li class="active"><a href="javascript:void(0);">${page }</a></li>
 				</c:if>
 				<c:if test="${page!=pageInfo.pageNum }">
-					<li><a href="${pageContext.request.contextPath}/product?method=productList&cid=${cid}&pageNum=${page }">${page }</a></li>
+					<li><a href="${pageContext.request.contextPath}/product/list?cid=${cid}&pn=${page }">${page }</a></li>
 				</c:if>
 			</c:forEach>
 			
@@ -112,7 +115,7 @@ body {
 			</c:if>
 			<c:if test="${pageInfo.pageNum!=pageInfo.total }">
 				<li>
-					<a href="${pageContext.request.contextPath}/product?method=productList&cid=${cid}&pageNum=${pageInfo.pageNum+1 }" aria-label="Next"> 
+					<a href="${pageContext.request.contextPath}/product/list?cid=${cid}&pn=${pageInfo.pageNum+1 }" aria-label="Next">
 						<span aria-hidden="true">&raquo;</span>
 					</a>
 				</li>
@@ -120,34 +123,13 @@ body {
 			
 		</ul>
 	</div>
+	  </div>
+	</div>
+
 	<!-- 分页结束 -->
 
-	<!--商品浏览记录-->
-	<div
-		style="width: 1210px; margin: 0 auto; padding: 0 9px; border: 1px solid #ddd; border-top: 2px solid #999; height: 246px;">
 
-		<h4 style="width: 50%; float: left; font: 14px/30px 微软雅黑">浏览记录</h4>
-		<div style="width: 50%; float: right; text-align: right;">
-			<a href="">more</a>
-		</div>
-		<div style="clear: both;"></div>
 
-		<div style="overflow: hidden;">
-
-			<ul style="list-style: none;">
-			
-				<c:forEach items="${historyProductList }" var="historyPro">
-					<li style="width: 150px; height: 216; float: left; margin: 0 8px 0 0; padding: 0 18px 15px; text-align: center;">
-						<img src="${pageContext.request.contextPath}/${historyPro.pimage}" width="130px" height="130px" />
-					</li>
-				</c:forEach>
-			
-				
-
-			</ul>
-
-		</div>
-	</div>
 
 
 	<!-- 引入footer.jsp -->

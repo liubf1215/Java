@@ -1,6 +1,7 @@
 package com.liubf.share.service;
 
 
+import com.liubf.share.pojo.Collect;
 import com.liubf.share.pojo.Product;
 
 import java.util.List;
@@ -16,4 +17,6 @@ public interface CollectService {
 
 
     void CancelCollect(String coid);
+
+    List<Collect> FindAll();
 }

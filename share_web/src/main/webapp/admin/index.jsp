@@ -7,54 +7,73 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="${pageContext.request.contextPath }/css/general.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath }/css/main.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath }/css/bootstrap.min.css" type="text/css" />
+  <script src="${pageContext.request.contextPath }/js/jquery-1.11.3.min.js" type="text/javascript"></script>
+  <script src="${pageContext.request.contextPath }/js/bootstrap.min.js" type="text/javascript"></script>
 
 <style type="text/css">
-body {
-  color: white;
-}
+
 </style>
 </head>
 <body style="background: #278296">
-<center></center>
-<form method="post" action="${pageContext.request.contextPath }/admin/home" target="_parent" name='theForm' onsubmit="return validate()">
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 ">
+
   <table cellspacing="0" cellpadding="0" style="margin-top: 100px" align="center">
   <tr>
     <td style="padding-left: 50px">
       <table>
       <tr>
         <td>管理员姓名：</td>
-        <td><input type="text" name="username" /></td>
+        <td><input type="text" name="username" id="username"/></td>
       </tr>
       <tr>
         <td>管理员密码：</td>
-        <td><input type="password" name="password" /></td>
+        <td><input type="text" name="password" id="password" /></td>
       </tr>
-      <tr><td>&nbsp;</td><td><input type="submit" value="进入管理中心"   class="button" /></td></tr>
+      <tr><td>&nbsp;</td><td><input type="button" onclick="sumbitdata()" value="进入管理中心"   class="button" /></td></tr>
       </table>
     </td>
   </tr>
   </table>
-</form>
+    </div>
+  </div>
+</div>
+
 <script language="JavaScript">
-<!--
-  document.forms['theForm'].elements['username'].focus();
-  
-  /**
-   * 检查表单输入的内容
-   */
-  function validate()
-  {
-    var validator = new Validator('theForm');
-    validator.required('username', user_name_empty);
-    //validator.required('password', password_empty);
-    if (document.forms['theForm'].elements['captcha'])
-    {
-      validator.required('captcha', captcha_empty);
+    function  sumbitdata(){
+        var username = document.getElementById("username").value;
+        var password= document.getElementById("password").value;
+        if (username==""|password==""){
+            alert("用户名或密码不能为空")
+            return false;
+        }
+        $.ajax({
+            url: '${pageContext.request.contextPath}/admin/login',
+            data:{'username':username,'password':password},
+            type: "POST",
+            dataType:'json',
+            success:function(data){
+                console.log(data);
+                if (data.status==200){
+                    window.location.href='${pageContext.request.contextPath }/admin/home?username='+data.data.username;
+                }else {
+                    alert(data.msg);
+                }
+
+
+
+
+            },
+            error : function(data) {
+                alert("出错：" +data);
+                console.log(data);
+            }
+
+        });
+
     }
-    return validator.passed();
-  }
-  
-//-->
    
 </script>
 </body>

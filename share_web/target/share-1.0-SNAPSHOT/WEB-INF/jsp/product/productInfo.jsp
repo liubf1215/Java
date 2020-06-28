@@ -52,7 +52,7 @@ body {
 				<div class="col-md-6">
 					<img style="opacity: 1; width: 400px; height: 350px;" title="${product.pname}"
 						class="medium"
-						src="${pageContext.request.contextPath }/${product.pimage}" />
+						src="${pageContext.request.contextPath }${product.pimage}" />
 						<!--  -->
 				</div>
 
@@ -66,7 +66,7 @@ body {
 					</div>
 
 					<div style="margin: 10px 0 10px 0;">
-						提取码: <strong style="color: #ef0101;"></strong>
+						提取码: <strong style="color: #ef0101;">${product.pcode}</strong>
 					</div>
 
 					<div style="margin: 10px 0 10px 0;">
@@ -84,7 +84,7 @@ body {
 								value="去提取" type="button">
 							</a> 
 						</div>
-                        <c:if test="${product.coid==''}">
+                        <c:if test="${product.coid==null}">
 							<div style="margin: 20px 0 10px 0;; text-align: center;">
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="${pageContext.request.contextPath}/collect/addItem?pid=${product.pid}">
 							 <input style="background: url('./images/product.gif') no-repeat scroll 0 -600px rgba(0, 0, 0, 0); height: 36px; width: 127px;"
@@ -92,7 +92,7 @@ body {
 							</a> 
                             </div>
                         </c:if>
-                        <c:if test="${product.coid!=''}">
+                        <c:if test="${product.coid!=null}">
                         <div style="margin: 20px 0 10px 0;; text-align: center;">
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="${pageContext.request.contextPath}/collect/cancel?coid=${product.coid}">
                             <input style="background: url('./images/product.gif') no-repeat scroll 0 -600px rgba(0, 0, 0, 0); height: 36px; width: 127px;"

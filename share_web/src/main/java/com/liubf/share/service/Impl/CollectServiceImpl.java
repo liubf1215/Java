@@ -115,11 +115,20 @@ public class CollectServiceImpl implements CollectService {
         List <Product> list = productMapper.selectByExample(example);
         for (Product product:
              list) {
-            product.setCoid("");
+            product.setCoid(null);
             productMapper.updateByPrimaryKeySelective(product);
         }
 
 
+    }
+
+    @Override
+    public List <Collect> FindAll() {
+        CollectExample example = new CollectExample();
+        CollectExample.Criteria criteria = example.createCriteria();
+        List <Collect> list = collectMapper.selectByExample(example);
+
+        return list;
     }
 
 

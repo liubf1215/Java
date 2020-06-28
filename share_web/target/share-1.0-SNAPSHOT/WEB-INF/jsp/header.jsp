@@ -1,17 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+		 pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <!-- 登录 注册 购物车... -->
 <div class="container-fluid">
 	<div class="col-md-4">
-		<img src="img/loge.png" />
+		<img src="${pageContext.request.contextPath }/img/loge.png" />
 	</div>
 	<div class="col-md-5">
 		
 	</div>
-	<div class="col-md-3" style="padding-top:4
-	0px">
+	<div class="col-md-3" style="padding-top:40px">
 		<ol class="list-inline">
 			<c:if test="${empty user}">
 				<li><a href="login">登录</a></li>
@@ -45,11 +44,7 @@
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav" id="categoryUl">
-				
-					<%-- <c:forEach items="${categoryList }" var="category">
-						<li><a href="#">${category.cname }</a></li>
-					</c:forEach> --%>
-					
+
 				</ul>
 				<form class="navbar-form navbar-right" action="${pageContext.request.contextPath}/search"  method="post" role="search">
 					<div class="form-group">

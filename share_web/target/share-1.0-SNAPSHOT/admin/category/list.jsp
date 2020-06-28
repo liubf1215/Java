@@ -24,7 +24,18 @@
                     //[{"cid":"xxx","cname":"xxxx"},{},{}]
                     //动态创建<li><a href="#">${category.cname }</a></li>
                     for(var i=0;i<data.length;i++){
-                        content+="<tr ><td>"+data[i].cid+"</td>" +"<td>"+data[i].cname+"</td> <td></td><td></td></tr>";
+                        content+="<tr onmouseover=\"this.style.backgroundColor = 'white'\" onmouseout=\"this.style.backgroundColor = '#F5FAFE';\"><td style=\"CURSOR: hand; HEIGHT: 22px\" align=\"center\"\n" +
+                            "width=\"18%\">"+data[i].cid+"</td>" +"<td style=\"CURSOR: hand; HEIGHT: 22px\" align=\"center\"\n" +
+                            "width=\"17%\">"+data[i].cname+"</td> <td align=\"center\" style=\"HEIGHT: 22px\"><a\n" +
+                            "href=\"${ pageContext.request.contextPath }/category/edit?cid="+data[i].cid+"\">\n" +
+                            "<img\n" +
+                            "src=\"${pageContext.request.contextPath}/images/i_edit.gif\"\n" +
+                            "border=\"0\" style=\"CURSOR: hand\">\n" +
+                            "</a></td><td align=\"center\" style=\"HEIGHT: 22px\"><a\n" +
+                            "href=\"${ pageContext.request.contextPath }/category/delete?cid="+data[i].cid+"\">\n" +
+                            "<img src=\"${pageContext.request.contextPath}/images/i_del.gif\"\n" +
+                            "width=\"16\" height=\"16\" border=\"0\" style=\"CURSOR: hand\">\n" +
+                            "</a></td></tr>";
                     }
 
                     //将拼接好的li放置到ul中
@@ -59,6 +70,7 @@
 					<table cellspacing="0" cellpadding="1" rules="all"
 						bordercolor="gray" border="1" id="DataGrid1"
 						style="BORDER-RIGHT: gray 1px solid; BORDER-TOP: gray 1px solid; BORDER-LEFT: gray 1px solid; WIDTH: 100%; WORD-BREAK: break-all; BORDER-BOTTOM: gray 1px solid; BORDER-COLLAPSE: collapse; BACKGROUND-COLOR: #f5fafe; WORD-WRAP: break-word">
+						<thead>
 						<tr
 							style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; HEIGHT: 25px; BACKGROUND-COLOR: #afd1f3">
 
@@ -67,25 +79,11 @@
 							<td width="7%" align="center">编辑</td>
 							<td width="7%" align="center">删除</td>
 						</tr>
-							<tr onmouseover="this.style.backgroundColor = 'white'"
-								onmouseout="this.style.backgroundColor = '#F5FAFE';">
-								<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-									width="18%">1</td>
-								<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-									width="17%">手机数码</td>
-								<td align="center" style="HEIGHT: 22px"><a
-									href="${ pageContext.request.contextPath }/admin/category/edit.jsp">
-										<img
-										src="${pageContext.request.contextPath}/images/i_edit.gif"
-										border="0" style="CURSOR: hand">
-								</a></td>
+						</thead>
+						<tbody>
 
-								<td align="center" style="HEIGHT: 22px"><a
-									href="">
-										<img src="${pageContext.request.contextPath}/images/i_del.gif"
-										width="16" height="16" border="0" style="CURSOR: hand">
-								</a></td>
-							</tr>
+						</tbody>
+
 					</table>
 				</td>
 			</tr>

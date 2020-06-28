@@ -5,10 +5,10 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>首页</title>
-		<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
-		<script src="js/jquery-1.11.3.min.js" type="text/javascript"></script>
-		<script src="js/bootstrap.min.js" type="text/javascript"></script>
+		<title>分享网首页，专注网盘资源分享</title>
+		<link rel="stylesheet" href="${pageContext.request.contextPath }/css/bootstrap.min.css" type="text/css" />
+		<script src="${pageContext.request.contextPath }/js/jquery-1.11.3.min.js" type="text/javascript"></script>
+		<script src="${pageContext.request.contextPath }/js/bootstrap.min.js" type="text/javascript"></script>
 		
 	</head>
 
@@ -18,7 +18,7 @@
 			<!-- 引入header.jsp -->
 			<jsp:include page="/WEB-INF/jsp/header.jsp"></jsp:include>
              <!--轮播图-->
-        <div >     
+        <div >
 		<div class="container-fluid" >
 			<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 				<!-- Indicators -->
@@ -31,19 +31,19 @@
 				<!-- Wrapper for slides -->
 				<div class="carousel-inner" role="listbox" style="width:100%">
 					<div class="item active">
-						<img src="img/1.jpg" alt="." style="width:100%;height:400px" >
-						<div class="carousel-caption">
+						<img src="${pageContext.request.contextPath }/img/javalunbo.jpg" alt="." style="width:100%;height:400px" >
+						<div class="${pageContext.request.contextPath }/carousel-caption">
 							.
 						</div>
 					</div>
 					<div class="item">
-						<img src="img/2.PNG" alt="." style="width:100%;height:400px">
-						<div class="carousel-caption">
+						<img src="${pageContext.request.contextPath }/img/pythonlunbo.PNG" alt="." style="width:100%;height:400px">
+						<div class="${pageContext.request.contextPath }/carousel-caption">
 							.
 						</div>
 					</div>
 					<div class="item">
-						<img src="img/3.jpg" alt="." style="width:100%;height:400px">
+						<img src="${pageContext.request.contextPath }/img/bigdata.jpg" alt="." style="width:100%;height:400px">
 						<div class="carousel-caption">
 							.
 						</div>
@@ -61,8 +61,8 @@
 				</a>
 			</div>
 		</div>
-		
-		<!--热门商品-->
+
+		<!--热门产品-->
 		<div class="container-fluid" style="margin-top: 10px;" style="background-color:#6dcff6">
 			<!--上面文字内容-->
 			<div class="row">
@@ -73,78 +73,42 @@
 		</div>
 			<!--图片内容-->
 			<div class="container-fluid" style="background-color:#6dcff6">
-					
-					     <div class="col-md-2 col-sm-2 col-xs-6" align="center">
-							<a href="#"><img src="img/javapro.png" /></a>
-							<p><a href="#"><font color="gray">电炖锅</font></a></p>
-							<p><font color="red">¥399</font></p>
-						</div>
-						<div class="col-md-2 col-sm-4 col-xs-6" align="center">
-							<a href="#"><img src="img/javapro.png" /></a>
-							<p><a href="#"><font color="gray">电炖锅</font></a></p>
-							<p><font color="red">¥399</font></p>
-						</div>
-						
-						<div class="col-md-2 col-sm-4 col-xs-6" align="center">
-							<a href="#"><img src="img/javapro.png" /></a>
-							<p><a href="#"><font color="gray">电炖锅</font></a></p>
-							<p><font color="red">¥399</font></p>
-						</div>
-						<div class="col-md-2 col-sm-4 col-xs-6" align="center">
-							<a href="#"><img src="img/javapro.png" /></a>
-							<p><a href="#"><font color="gray">电炖锅</font></a></p>
-							<p><font color="red">¥399</font></p>
-						</div>
-						<div class="col-md-2 col-sm-4 col-xs-6" align="center">
-							<a href="#"><img src="img/javapro.png" /></a>
-							<p><a href="#"><font color="gray">电炖锅</font></a></p>
-							<p><font color="red">¥399</font></p>
-						</div>
-						<div class="col-md-2 col-sm-4 col-xs-6" align="center">
-							<a href="#"><img src="img/javapro.png" /></a>
-							<p><a href="#"><font color="gray">电炖锅</font></a></p>
-							<p><font color="red">¥399</font></p>
-						</div>
+
+				<c:if test="${empty productList}">
+					<font color="#FF0000" >&nbsp;&nbsp;&nbsp;&nbsp;没有商品</font>
+				</c:if>
+
+
+				<c:if test="${!empty productList}">
+
+					<c:forEach items="${productList}" var="pro" varStatus="st">
+
+						<c:if test="${st.index<12}">
 						<div class="col-md-2 col-sm-2 col-xs-6" align="center">
-							<a href="#"><img src="img/javapro.png" /></a>
-							<p><a href="#"><font color="gray">电炖锅</font></a></p>
-							<p><font color="red">¥399</font></p>
+							<a href="${pageContext.request.contextPath }/product/info?pid=${pro.pid}">
+								<img src="${pageContext.request.contextPath }${pro.pimage}" />
+							</a>
+							<p>
+								<a href="${pageContext.request.contextPath }/product/info?pid=${pro.pid}"><font color="#FF0000">${pro.pname }</font></a>
+							</p>
+						</c:if>
+
+
 						</div>
-						<div class="col-md-2 col-sm-4 col-xs-6" align="center">
-							<a href="#"><img src="img/javapro.png" /></a>
-							<p><a href="#"><font color="gray">电炖锅</font></a></p>
-							<p><font color="red">¥399</font></p>
+
+					</c:forEach>
+				</c:if>
+
+
 						</div>
-						
-						<div class="col-md-2 col-sm-4 col-xs-6" align="center">
-							<a href="#"><img src="img/javapro.png" /></a>
-							<p><a href="#"><font color="gray">电炖锅</font></a></p>
-							<p><font color="red">¥399</font></p>
-						</div>
-						<div class="col-md-2 col-sm-4 col-xs-6" align="center">
-							<a href="#"><img src="img/javapro.png" /></a>
-							<p><a href="#"><font color="gray">电炖锅</font></a></p>
-							<p><font color="red">¥399</font></p>
-						</div>
-						<div class="col-md-2 col-sm-4 col-xs-6" align="center">
-							<a href="#"><img src="img/javapro.png" /></a>
-							<p><a href="#"><font color="gray">电炖锅</font></a></p>
-							<p><font color="red">¥399</font></p>
-						</div>
-						<div class="col-md-2 col-sm-4 col-xs-6" align="center">
-							<a href="#"><img src="img/javapro.png" /></a>
-							<p><a href="#"><font color="gray">电炖锅</font></a></p>
-							<p><font color="red">¥399</font></p>
-						</div>	
-						</div>
-			     	
-				
-			
-				
-		
-		
-			
-			
+
+
+
+
+
+
+
+
 			
 			
 			<!-- 引入footer.jsp -->

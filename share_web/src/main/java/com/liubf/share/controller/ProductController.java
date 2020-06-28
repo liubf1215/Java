@@ -1,6 +1,7 @@
 package com.liubf.share.controller;
 
 import java.io.*;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -29,6 +31,7 @@ import com.liubf.share.pojo.Category;
 import com.liubf.share.service.ProductService;
 import com.liubf.share.utils.JsonUtils;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Controller
 //商品web层
@@ -73,7 +76,7 @@ public class ProductController {
                               @RequestParam(value = "cid", defaultValue ="1")String  cid,Model model){
 
         // 页数
-        PageHelper.startPage(pn, 8);
+        PageHelper.startPage(pn, 12);
         // startPage
         List<Product> list=productService.productList(cid);
 
@@ -94,73 +97,147 @@ public class ProductController {
         return list;
 
     }
+
+    /**
+     * 图片上传
+     * @param pimage
+     * @param request
+     * @return
+     */
+    @RequestMapping(value="/upload_pimage",method= RequestMethod.POST)
+    @ResponseBody
+    public Map<String, String> uploadpimage(MultipartFile pimage,HttpServletRequest request){
+        Map<String, String> ret = new HashMap<String, String>();
+        if(pimage == null){
+            ret.put("type", "error");
+            ret.put("msg", "图片不存在");
+            return ret;
+        }
+        if(pimage.getSize() > 1024*1024*1024){
+            ret.put("type", "error");
+            ret.put("msg", "图片太大");
+            return ret;
+        }
+        //图片上传
+        String suffix =pimage .getOriginalFilename().substring(pimage.getOriginalFilename().lastIndexOf(".")+1,pimage.getOriginalFilename().length());
+        if(!"jpg,jpeg,gif,png".toUpperCase().contains(suffix.toUpperCase())){
+            ret.put("type", "error");
+            ret.put("msg", "不是jpg,jpeg,gif,png格式");
+            return ret;
+        }
+        String savePath = request.getServletContext().getRealPath("/") + "img/";
+        File savePathFile = new File(savePath);
+        if(!savePathFile.exists()){
+            //如果不存在
+            savePathFile.mkdir();
+        }
+        String filename = new Date().getTime()+"."+suffix;
+        try {
+
+            //上传
+            pimage.transferTo(new File(savePath+filename));
+        }catch (Exception e) {
+            // TODO Auto-generated catch block
+            ret.put("type", "error");
+            ret.put("msg", "出错");
+            e.printStackTrace();
+            return ret;
+        }
+        ret.put("type", "success");
+        ret.put("msg", "成功");
+        ret.put("filepath",request.getServletContext().getContextPath() + "/img/" + filename );
+        return ret;
+    }
+
     @RequestMapping("/add")
     //添加产品
-    public  void AddProduct(HttpServletRequest request) throws FileUploadException {
-        System.out.println(request.toString());
-        try {
-    //创建磁盘文件项工厂
-    DiskFileItemFactory factory = new DiskFileItemFactory();
-    //创建文件上传核心对象
-    ServletFileUpload upload = new ServletFileUpload(factory);
-    //解析request获得文件项对象集合
-            Map <String, List <FileItem>> listMap = upload.parseParameterMap(request);
-            System.out.println(listMap);
-            List<FileItem> parseRequest = upload.parseRequest(request);
-            System.out.println(parseRequest);
-    for(FileItem item : parseRequest){
-    //判断是否是普通表单项
-        boolean formField = item.isFormField();
-        //收集数据的容器
-        Product product= new Product();
-        Map<String,Object> map = new HashMap<String,Object>();
-        if(formField){
-            //普通表单项 获得表单的数据 封装到Product实体中
-            String fieldName = item.getFieldName();
-
-            String   fieldValue = item.getString("UTF-8");
+    public String AddProduct(Product product,HttpServletRequest request){
 
 
-            map.put(fieldName, fieldValue);
 
-        }else{
-            //文件上传项 获得文件名称 获得文件的内容
-            String fileName = item.getName();
-
-            String path = request.getSession().getServletContext().getRealPath("img");
-            System.out.println(path);
-            InputStream in = item.getInputStream();
-            OutputStream out = new FileOutputStream(path +"/"+fileName);//I:/xxx/xx/xxx/xxx.jpg
-            IOUtils.copy(in, out);
-            in.close();
-            out.close();
-            item.delete();
-
-            map.put("pimage", "img/"+fileName);
-        }
-        System.out.println(map);
-        //复制相同属性
-        BeanUtils.populate(product, map);
-        product.setPid(CommonsUtils.getUUID());
         productService.addProduct(product);
+
+
+        return "redirect:"+request.getServletContext().getContextPath() +"/admin/productlist";
+
+
+    }
+    @RequestMapping("/update")
+    //更新产品
+    public String UpdateProduct(String pid,Model model){
+
+
+        Product product = productService.findProducby(pid);
+
+
+        model.addAttribute("product",product);
+        return "/admin/product/edit";
+
+
+    }
+    @RequestMapping("/updateData")
+    //修改产品
+    public String UpdateProductData(Product product,HttpServletRequest request){
+
+        productService.UpdateProductData(product);
+
+
+        return "redirect:"+request.getServletContext().getContextPath() +"/admin/productlist";
+
+
+    }
+    @RequestMapping("/delete")
+    //删除产品
+    public String deleteProduct(String pid,HttpServletRequest request){
+
+
+
+        productService.deleteProduct(pid,request);
+
+
+        return "redirect:"+request.getServletContext().getContextPath() +"/admin/productlist";
+
+
     }
 
-    } catch (Exception e) {
-    e.printStackTrace();
-     }
 
-    }
+
+
 
         //查出产品信息
     @RequestMapping("/info")
     public String productInfo(String pid,Model model){
         Product  product=productService.findProducby(pid);
-        product.setPimage("img/1.JPG");
+
         model.addAttribute("product",product);
 
         return "product/productInfo";
 
     }
+    //查出产品信息
+    @RequestMapping("/search")
+    @ResponseBody
+    public  List<Product> productSearch(String pname,Model model){
+
+       List<Product> list=productService.productSearch(pname);
+
+
+        return list;
+
+    }
+    //查出产品信息
+    @RequestMapping("/hot")
+    @ResponseBody
+    public  List<Product> hotProduct( Model model){
+
+        List<Product> list=productService.hotProduct();
+        PageInfo page = new PageInfo(list, 8);
+        model.addAttribute("pageInfo", page);
+
+        return list;
+
+    }
+
 
 
 

@@ -11,5 +11,11 @@ public interface CategoryService {
     List<Category> findAll();
 
 
+    Category findbyCid(String cid);
 
+    void update(Category category);
+
+    void addCateg(Category category);
+
+    void delete(String cid);
 }

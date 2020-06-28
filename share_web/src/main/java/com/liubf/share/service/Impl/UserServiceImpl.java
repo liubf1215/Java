@@ -92,6 +92,7 @@ public class UserServiceImpl implements UserService {
             }else {
 
             }
+            user.setPassword("");
 
 
 

@@ -6,11 +6,13 @@ import com.liubf.share.pojo.Category;
 import com.liubf.share.pojo.Product;
 import com.liubf.share.service.base.IBaseService;
 
+import javax.servlet.http.HttpServletRequest;
+
 public interface ProductService  extends IBaseService<Category>  {
 
 
 
-    List<Product> hotProductList ();
+
 
     public List<Product> productList(String cid);
 
@@ -22,4 +24,12 @@ public interface ProductService  extends IBaseService<Category>  {
 
 
     void addProduct(Product product);
+
+    void UpdateProductData(Product product);
+
+    void deleteProduct(String pid, HttpServletRequest request);
+
+    List<Product> productSearch(String pname);
+
+    List<Product> hotProduct();
 }

@@ -3,6 +3,7 @@ package com.liubf.share.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
+import com.liubf.share.pojo.Collect;
 import com.liubf.share.pojo.Product;
 import com.liubf.share.pojo.User;
 import com.liubf.share.service.CollectService;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -73,6 +75,12 @@ public class CollectController {
     public String cancel(String coid) {
         collectService.CancelCollect(coid);
         return "redirect:/collect/myCollect";
+    }
+    @RequestMapping("/all")
+    @ResponseBody
+    public List<Collect> All(String coid) {
+        List<Collect>  list=collectService.FindAll();
+        return list;
     }
 
 
